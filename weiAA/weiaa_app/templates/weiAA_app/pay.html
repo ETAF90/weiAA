@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block etaf_body %}
+<div class="etaf_body jumbotron" style="text-align: center">
+    <h2>为您所参与的活动缴费</h2>
+    <br/>
+    <br/>
+    <h4>应缴金额： {{real_per_cost}}</h4>
+</div>
+<div style="margin-left: 42%">
+
+    <br/>
+    <br/>
+    <br/>
+    <div class="list-group" style="width: 30%;text-align: center">
+        <a class="list-group-item etaf_list-group-item" href="https://www.alipay.com/‎">用支付宝支付</a></li>
+        <a class="list-group-item etaf_list-group-item" href="http://www.icbc.com.cn/icbc/">工商银行网银支付</a>
+        <a class="list-group-item etaf_list-group-item" href="http://www.cmbchina.com/">招商银行网银支付</a></li>
+        <a class="list-group-item etaf_list-group-item" href="http://www.ccb.com/cn/home/index.html">建行网银支付</a>
+        <a class="list-group-item etaf_list-group-item" href="http://www.abchina.com/cn/">农业银行网银支付</a>
+		 <br/>
+
+    <p style="text-align: center"><a class="btn btn-primary btn-lg" role="button" href="/">返回</a></p>
+    </div>
+   
+</div>
+
+
+{% endblock %}

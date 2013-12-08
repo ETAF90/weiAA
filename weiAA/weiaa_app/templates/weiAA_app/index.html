@@ -1,0 +1,86 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block etaf_body %}
+<style>
+    .etaf_body {
+        background-image: url({% static 'weiAA_app/img/bg.jpg' %} );
+        background-attachment: fixed;
+    }
+
+    .etaf_pan {
+        background-image: url({% static 'weiAA_app/img/left_bg.png' %} );
+        background-attachment: fixed;
+    }
+</style>
+
+<script type="text/javascript">
+
+
+</script>
+
+<div class="etaf_body " id="etaf_pan_left">
+<div class="container clearfix" >
+<div class="row" >
+<div class="col-md-3 column ">
+
+    <div class="etaf_pan pinned etaf_pin">
+        <div class="etaf_profile">
+            <img src="{{profile_img}}" class="img-responsive img-thumbnail"
+                 alt="Responsive image">
+        </div>
+        <div class="etaf_remind_text">
+            <br/>
+
+            <div class="list-group">
+                <a href="#" class="list-group-item etaf_list-group-item"> 待确认活动：<span class="badge">{{ unconfirm_activity_count }}</span></a>
+                <a href="#" class="list-group-item etaf_list-group-item"> 待缴费活动：<span class="badge">{{ topay_activity_count }}</span></a>
+                <a href="#" class="list-group-item etaf_list-group-item"> 收费中活动：<span class="badge">{{ feeing_activity_count }}</span></a>
+            </div>
+        </div>
+        <div>
+            <!--<button class="btn btn-primary btn-lg btn-block" data-toggle="modal" data-target="#create_modal" >-->
+                <!--创 &nbsp;建 &nbsp; 活 &nbsp; 动&nbsp;-->
+            <!--</button>-->
+            <a class="btn btn-primary btn-lg btn-block"  href="create_act">
+                创 &nbsp;建 &nbsp; 活 &nbsp; 动&nbsp;
+            </a>
+
+            <button type="button" class="btn btn-warning btn-lg btn-block " data-toggle="collapse"
+                    data-target="#act_level1">
+                活&nbsp; 动&nbsp; 列 &nbsp; 表 &nbsp;
+            </button>
+            <div id="act_level1" class=" collapse" style="padding-top: 3%; padding-right: 10%">
+                <!--<button type="button" class="btn btn-danger  btn-block"  data-toggle="collapse" data-target="#act_list_2321" id="show_act_list_1">-->
+                <button type="button" class="btn btn-danger  btn-block"  id="show_act_panel_a">
+                    已创建活动
+                </button>
+                <!--<button type="button" class="btn btn-danger  btn-block " id="show_act_list_2" data-toggle="collapse" data-target="#act_list_3245">-->
+                <button type="button" class="btn btn-danger  btn-block " id="show_act_panel_b" >
+                    被邀请活动
+                </button>
+            </div>
+        </div>
+
+    </div>
+</div>
+<div class="col-md-6 column">
+<div class="etaf_pan">
+{% include "weiAA_app/myact.html"%}
+{% include "weiAA_app/invitedact.html"%}
+</div>
+</div>
+<div class="col-md-3 column ">
+    <div class="etaf_pan">
+
+    </div>
+</div>
+</div>
+
+</div>
+
+
+</div>
+
+
+{% endblock %}

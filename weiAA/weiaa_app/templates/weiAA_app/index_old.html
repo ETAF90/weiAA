@@ -1,0 +1,786 @@
+<!DOCTYPE html >
+<html>
+<head>
+    {% load staticfiles %}
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title>Let's weiAA</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta name="description" content="">
+    <meta name="author" content="ETAF">
+    <link rel="shortcut icon" href="{% static 'weiAA_app/img/favicon.png' %} ">
+
+
+    <!-- Bootstrap cdn
+    <link rel="stylesheet" href="http://cdn.bootcss.com/twitter-bootstrap/3.0.2/css/bootstrap.min.css">
+    <script src="http://cdn.bootcss.com/jquery/1.10.2/jquery.min.js"></script>
+    <script src="http://cdn.bootcss.com/twitter-bootstrap/3.0.2/js/bootstrap.min.js"></script>
+    -->
+    <!-- Bootstrap local-->
+    <link rel="stylesheet" href="{% static 'weiAA_app/css/bootstrap.css'%}">
+    <link href="{% static 'weiAA_app/css/bootstrap-datetimepicker.min.css'%}" rel="stylesheet" media="screen">
+
+    <script src="{% static 'weiAA_app/js/jquery-1.8.3.min.js' %}"></script>
+    <script src="{% static 'weiAA_app/js/bootstrap.js'%}"></script>
+    <script src="{% static 'weiAA_app/js/jquery.pin.min.js'%}"></script>
+    <script type="text/javascript" src="{% static 'weiAA_app/js/bootstrap-datetimepicker.js'%}"></script>
+    <script type="text/javascript" src="{% static 'weiAA_app/js/bootstrap-datetimepicker.fr.js'%}"></script>
+    <!-- mystyle -->
+    <link rel="stylesheet" href="{% static 'weiAA_app/css/style.css'%}">
+    <style>
+        .etaf_body {
+            padding-top: 100px;
+            padding-bottom: 20px;
+            background-image: url({% static 'weiAA_app/img/bg.jpg' %} );
+            background-repeat: no-repeat;
+            background-position: center;
+            background-attachment: fixed;
+
+        }
+
+        .etaf_pan {
+            min-height: 680px;
+            width: 99.9%;
+            background-image: url({% static 'weiAA_app/img/left_bg.png' %} );
+            background-repeat: repeat;
+            padding: 10px;
+        }
+    </style>
+
+    <script type="text/javascript">
+
+    </script>
+</head>
+<body>
+
+<div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar">aaaa</span>
+                <span class="icon-bar">aaaa</span>
+                <span class="icon-bar">aaa</span>
+            </button>
+            <a class="logo navbar-brand" href="./"><img src="{% static 'weiAA_app//img/logo.png'%}"></a>
+        </div>
+
+        <div class="navbar-collapse collapse">
+            <form class="navbar-form navbar-right ">
+                <div class="form-group navbar-brand">
+                    <input type="text" placeholder="search content..." class="form-control">
+
+                </div>
+                <div class="navbar-brand">
+                    <button type="submit" class="btn btn-success ">Search</button>
+                </div>
+            </form>
+        </div>
+        <!--/.navbar-collapse -->
+    </div>
+</div>
+<div class="etaf_body">
+<div class="container">
+<div class="row clearfix">
+<div class="col-md-3 column " id="etaf_pan_left">
+    <div class="etaf_pan">
+        <div class="etaf_profile">
+            <img src="{% static 'weiAA_app/img/profile.png'%}" class="img-responsive img-thumbnail"
+                 alt="Responsive image">
+        </div>
+        <div class="etaf_remind_text">
+            <br/>
+
+            <div class="list-group">
+                <a href="#" class="list-group-item etaf_list-group-item"> 待收费活动：<span class="badge">1</span></a>
+                <a href="#" class="list-group-item etaf_list-group-item"> 未缴费活动：<span class="badge">1</span></a>
+                <a href="#" class="list-group-item etaf_list-group-item"> 未缴费活动：<span class="badge">2</span></a>
+                <a href="#" class="list-group-item etaf_list-group-item"> 待投票活动：<span class="badge">3</span></a>
+            </div>
+        </div>
+        <div>
+            <button class="btn btn-primary btn-lg btn-block" data-toggle="modal" data-target="#create_modal">
+                创 &nbsp;建 &nbsp; 活 &nbsp; 动&nbsp;
+            </button>
+            <button type="button" class="btn btn-warning btn-lg btn-block " data-toggle="collapse"
+                    data-target="#act_level1">
+                活&nbsp; 动&nbsp; 列 &nbsp; 表 &nbsp;
+            </button>
+            <div id="act_level1" class=" collapse" style="padding-top: 3%; padding-right: 10%">
+                <button type="button" class="btn btn-danger  btn-block btn_load " data-toggle="collapse">
+                    已创建活动
+                </button>
+                <button type="button" class="btn btn-danger  btn-block " data-toggle="collapse">
+                    参与的活动
+                </button>
+            </div>
+        </div>
+
+    </div>
+</div>
+<div class="col-md-6 column">
+<div class="etaf_pan">
+<div class="tabbable" id="tabs-565942">
+<ul class="nav nav-tabs">
+    <li class="active">
+        <a href="#panel-tab1" data-toggle="tab"><h4>未确认活动</h4></a>
+    </li>
+    <li>
+        <a href="#panel-tab2" data-toggle="tab"><h4>已确认活动</h4></a>
+    </li>
+    <li>
+        <a href="#panel-tab3" data-toggle="tab"><h4>已结束活动</h4></a>
+    </li>
+</ul>
+<!-- tab - content-->
+<div class="tab-content">
+<!-- tab1 content -->
+<div class="tab-pane active" id="panel-tab1">
+<!--  <h3>未确认活动</h3> -->
+<br/>
+
+<div class="panel-group" id="accordion">
+<!--活动-->
+<div class="panel panel-default">
+    <!-- 活动head -->
+    <div class="panel-heading">
+        <h4 class="panel-title">
+
+            <a href="#act_id_1" data-toggle="collapse">
+                <span class="label label-danger">活动名</span>
+                <span class="label label-primary">2013-12-12</span>
+                <span class="label label-success">创建者: ETAF</span>
+                <span class="label label-info">活动状态: 未确认</span>
+            </a>
+        </h4>
+    </div>
+    <!--  活动body -->
+    <div id="act_id_1" class="panel-collapse collapse">
+        <div class="panel-body">
+            <div>
+                <table class="table table-condensed table-hover etaf_td_width_4">
+                    <!-- 活动方案 -->
+                    <tr>
+                        <td colspan="2">
+                            方案提出者：dancing_links
+                        </td>
+                        <td>
+                            票数：2
+                        </td>
+                        <td>
+                            <button type="button" class="btn btn-success etaf_vote_btn">
+                                投票
+                            </button>
+                        </td>
+                    </tr>
+                    <tr class="active">
+                        <td>时间</td>
+                        <td>地点</td>
+                        <td>内容</td>
+                        <td>预计消费金额</td>
+                    </tr>
+                    <tr class="success">
+                        <td>12:00</td>
+                        <td>大丰收鱼庄宝龙店</td>
+                        <td>大丰收吃鱼</td>
+                        <td>200</td>
+                    </tr>
+                    <tr class="danger">
+                        <td>14:00</td>
+                        <td>agogo万象店</td>
+                        <td>agogo唱歌</td>
+                        <td>100</td>
+                    </tr>
+                    <tr class="active">
+                        <td colspan="4">
+                            <div class="etaf_momey_line">
+                                预计人均：100 <span class="badge">￥</span>
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+                <hr class="cut_line"/>
+            </div>
+            <div>
+                <table class="table table-condensed table-hover etaf_td_width_4">
+                    <!-- 活动方案 -->
+                    <tr>
+                        <td colspan="2">
+                            方案提出者：dancing_links
+                        </td>
+                        <td>
+                            票数：2
+                        </td>
+                        <td>
+                            <button type="button" class="btn btn-success etaf_vote_btn">
+                                投票
+                            </button>
+                        </td>
+                    </tr>
+                    <tr class="active">
+                        <td>时间</td>
+                        <td>地点</td>
+                        <td>内容</td>
+                        <td>预计消费金额</td>
+                    </tr>
+                    <tr class="success">
+                        <td>12:00</td>
+                        <td>大丰收鱼庄宝龙店</td>
+                        <td>大丰收吃鱼</td>
+                        <td>200</td>
+                    </tr>
+                    <tr class="danger">
+                        <td>14:00</td>
+                        <td>agogo万象店</td>
+                        <td>agogo唱歌</td>
+                        <td>100</td>
+                    </tr>
+                    <tr class="active">
+                        <td colspan="4">
+                            <div class="etaf_momey_line">
+                                预计人均：100 <span class="badge">￥</span>
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+                <hr class="cut_line"/>
+            </div>
+            <!-- 参与者list-->
+            <div>
+                <h4><span class="label label-primary">参与者名单:</span></h4>
+                <table class="table table-condensed table-hover">
+                    <tr>
+                        <td colspan="2">参与者</td>
+                        <td>是否参加</td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">dancing_links</td>
+                        <td><span class="label label-success">Yes</span></td>
+                        <td>
+                            <button class="btn btn-info etaf_remind_btn" disabled>
+                                提醒
+                            </button>
+                        </td>
+                        <td>
+                            <button class="btn btn-danger etaf_remind_btn" disabled>
+                                删除
+                            </button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">memberOne</td>
+                        <td><span class="label label-default">No</span></td>
+                        <td>
+                            <button class="btn btn-info etaf_remind_btn">
+                                提醒
+                            </button>
+                        </td>
+                        <td>
+                            <button class="btn btn-danger etaf_remind_btn" >
+                                删除
+                            </button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">memberTwo</td>
+                        <td><span class="label label-default">No</span></td>
+                        <td>
+                            <button class="btn btn-info etaf_remind_btn" >
+                                提醒
+                            </button>
+                        </td>
+                        <td>
+                            <button class="btn btn-danger etaf_remind_btn" >
+                                删除
+                            </button>
+                        </td>
+                    </tr>
+                </table>
+                </ul>
+            </div>
+            <!-- 确认活动 -->
+            <div>
+                <a data-trigger="confirm" href="#" class="btn btn-primary btn-lg btn-block">添加新方案</a>
+            </div>
+            <!-- 新方案 -->
+            <div>
+                <a data-trigger="confirm" href="#" class="btn btn-danger btn-lg btn-block">确认</a>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h4 class="panel-title">
+            <a href="#act_id_12" data-toggle="collapse">
+                <span class="label label-danger">活动名</span>
+                <span class="label label-primary">2013-12-12</span>
+                <span class="label label-success">创建者: ETAF</span>
+                <span class="label label-info">活动状态: 未确认</span>
+            </a>
+        </h4>
+    </div>
+    <!--  活动body -->
+    <div id="act_id_12" class="panel-collapse collapse">
+        <div class="panel-body">
+            <div>
+                <table class="table table-condensed table-hover etaf_td_width_4">
+                    <!-- 活动方案 -->
+                    <tr>
+                        <td colspan="2">
+                            方案提出者：dancing_links
+                        </td>
+                        <td>
+                            票数：2
+                        </td>
+                        <td>
+                            <button type="button" class="btn btn-success etaf_vote_btn">
+                                投票
+                            </button>
+                        </td>
+                    </tr>
+                    <tr class="active">
+                        <td>时间</td>
+                        <td>地点</td>
+                        <td>内容</td>
+                        <td>预计消费金额</td>
+                    </tr>
+                    <tr class="success">
+                        <td>12:00</td>
+                        <td>大丰收鱼庄宝龙店</td>
+                        <td>大丰收吃鱼</td>
+                        <td>200</td>
+                    </tr>
+                    <tr class="danger">
+                        <td>14:00</td>
+                        <td>agogo万象店</td>
+                        <td>agogo唱歌</td>
+                        <td>100</td>
+                    </tr>
+                    <tr class="active">
+                        <td colspan="4">
+                            <div class="etaf_momey_line">
+                                预计人均：100 <span class="badge">￥</span>
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+                <hr class="cut_line"/>
+            </div>
+            <!-- 活动方案 -->
+            <div>
+                <table class="table table-condensed table-hover etaf_td_width_4">
+                    <!-- 活动方案 -->
+                    <tr>
+                        <td colspan="2">
+                            方案提出者：dancing_links
+                        </td>
+                        <td>
+                            票数：2
+                        </td>
+                        <td>
+                            <button type="button" class="btn btn-success etaf_vote_btn">
+                                投票
+                            </button>
+                        </td>
+                    </tr>
+                    <tr class="active">
+                        <td>时间</td>
+                        <td>地点</td>
+                        <td>内容</td>
+                        <td>预计消费金额</td>
+                    </tr>
+                    <tr class="success">
+                        <td>12:00</td>
+                        <td>大丰收鱼庄宝龙店</td>
+                        <td>大丰收吃鱼</td>
+                        <td>200</td>
+                    </tr>
+                    <tr class="danger">
+                        <td>14:00</td>
+                        <td>agogo万象店</td>
+                        <td>agogo唱歌</td>
+                        <td>100</td>
+                    </tr>
+                    <tr class="active">
+                        <td colspan="4">
+                            <div class="etaf_momey_line">
+                                预计人均：100 <span class="badge">￥</span>
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+                <hr class="cut_line"/>
+            </div>
+            <!-- 参与者list-->
+            <div>
+                <h4><span class="label label-primary">参与者名单:</span></h4>
+                <table class="table table-condensed table-hover">
+                    <tr>
+                        <td colspan="2">参与者</td>
+                        <td>是否参加</td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">dancing_links</td>
+                        <td><span class="label label-success">Yes</span></td>
+                        <td>
+                            <button class="btn btn-info etaf_remind_btn" disabled>
+                                提醒
+                            </button>
+                        </td>
+                        <td>
+                            <button class="btn btn-danger etaf_remind_btn" disabled>
+                                删除
+                            </button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">memberOne</td>
+                        <td><span class="label label-default">No</span></td>
+                        <td>
+                            <button class="btn btn-info etaf_remind_btn">
+                                提醒
+                            </button>
+                        </td>
+                        <td>
+                            <button class="btn btn-danger etaf_remind_btn" >
+                                删除
+                            </button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">memberTwo</td>
+                        <td><span class="label label-default">No</span></td>
+                        <td>
+                            <button class="btn btn-info etaf_remind_btn" >
+                                提醒
+                            </button>
+                        </td>
+                        <td>
+                            <button class="btn btn-danger etaf_remind_btn" >
+                                删除
+                            </button>
+                        </td>
+                    </tr>
+                </table>
+                </ul>
+            </div>
+            <div>
+                <a data-trigger="confirm" href="#" class="btn btn-primary btn-lg btn-block">确认</a>
+            </div>
+            <!-- 新方案 -->
+            <div>
+                <a data-trigger="confirm" href="#" class="btn btn-danger btn-lg btn-block">添加新方案</a>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+</div>
+<!-- tab2 content -->
+<div class="tab-pane" id="panel-tab2">
+    <!--  <h3>已确认活动</h3> -->
+    <br/>
+
+    <div class="panel-group">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h4 class="panel-title">
+                    <a href="#act_id_2" data-toggle="collapse">
+                        <span class="label label-danger">活动名</span>
+                        <span class="label label-primary">2013-12-12</span>
+                        <span class="label label-success">创建者: ETAF</span>
+                        <span class="label label-info">活动状态: 已确认</span>
+                    </a>
+                </h4>
+            </div>
+            <!--  活动body -->
+            <div id="act_id_2" class="panel-collapse collapse">
+                <div class="panel-body">
+                    <table class="table table-condensed table-hover etaf_td_width_4">
+                        <!-- 活动方案 -->
+                        <tr>
+                            <td colspan="2">
+                                方案提出者：dancing_links
+                            </td>
+                            <td>
+                                票数：2
+                            </td>
+                            <td>
+
+                            </td>
+                        </tr>
+                        <tr class="active">
+                            <td>时间</td>
+                            <td>地点</td>
+                            <td>内容</td>
+                            <td></td>
+                        </tr>
+
+                        <tr class="success">
+                            <td>12:00</td>
+                            <td>大丰收鱼庄宝龙城市广场</td>
+                            <td>大丰收吃鱼</td>
+                            <td></td>
+                        </tr>
+
+                        <tr class="danger">
+                            <td>14:00</td>
+                            <td>agogo万象城店</td>
+                            <td>agogo唱歌</td>
+                            <td></td>
+                        </tr>
+                        <tr class="active">
+
+                            <td colspan="4">
+                                <div class="etaf_money_line">预计人均：100</div>
+                            </td>
+                        </tr>
+                    </table>
+                    <hr class="cut_line"/>
+
+                    <!-- 参与者list-->
+                    <div>
+                        <h4><span class="label label-primary">参与者名单:</span></h4>
+                        <table class="table table-condensed table-hover">
+                            <tr>
+                                <td colspan="4">参与者</td>
+
+                            </tr>
+                            <tr>
+                                <td colspan="4">dancing_links</td>
+
+                            </tr>
+                            <tr>
+                                <td colspan="4">memberOne</td>
+
+                            </tr>
+                            <tr>
+                                <td colspan="4">memberTwo</td>
+                            </tr>
+                        </table>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- tab3 content -->
+<div class="tab-pane" id="panel-tab3">
+    <!--<h3>已结束活动</h3>-->
+    <br/>
+
+    <div class="panel-group">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h4 class="panel-title">
+                    <a href="#act_id_3" data-toggle="collapse">
+                        <span class="label label-danger">活动名</span>
+                        <span class="label label-primary">2013-12-12</span>
+                        <span class="label label-success">创建者: ETAF</span>
+                        <span class="label label-info">活动状态: 已结束</span>
+                    </a>
+                </h4>
+            </div>
+            <!--  活动body -->
+            <div id="act_id_3" class="panel-collapse collapse">
+                <div class="panel-body">
+                    <table class="table table-condensed table-hover etaf_td_width_4">
+                        <!-- 活动方案 -->
+                        <tr>
+                            <td colspan="2">
+                                方案提出者：dancing_links
+                            </td>
+                            <td>
+                                票数：2
+                            </td>
+                            <td>
+
+                            </td>
+                        </tr>
+                        <tr class="active">
+                            <td>时间</td>
+                            <td>地点</td>
+                            <td>内容</td>
+                            <td>实际消费金额</td>
+                        </tr>
+                        <tr class="success">
+                            <td>12:00</td>
+                            <td>大丰收宝龙店</td>
+                            <td>大丰收吃鱼</td>
+                            <td>200 <span class="badge">￥</span></td>
+                        </tr>
+                        <tr class="danger">
+                            <td>14:00</td>
+                            <td>agogo万象店</td>
+                            <td>agogo唱歌</td>
+                            <td>100 <span class="badge">￥</span></td>
+                        </tr>
+                        <tr class="active">
+
+                            <td colspan=4>
+                                <div class="etaf_momey_line">实际人均：100 <span class="badge">￥</span>
+                                </div>
+                            </td>
+                        </tr>
+                    </table>
+                    <hr class="cut_line"/>
+                    <!-- 参与者list-->
+                    <div>
+                        <h4><span class="label label-primary">参与者名单:</span></h4>
+                        <table class="table table-condensed table-hover">
+                            <tr>
+                                <td>参与者</td>
+                                <td>应缴金额</td>
+                                <td>是否缴费</td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>dancing_links</td>
+                                <td> 100 <span class="badge">￥</span></td>
+                                <td><span class="label label-success">Yes</span></td>
+                                <td>
+                                    <button class="btn btn-danger etaf_remind_btn" disabled>
+                                        提醒
+                                    </button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>memberOne</td>
+                                <td> 100 <span class="badge">￥</span></td>
+                                <td><span class="label label-default">No</span></td>
+                                <td>
+                                    <button class="btn btn-danger etaf_remind_btn">
+                                        提醒
+                                    </button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>memberTwo</td>
+                                <td> 100 <span class="badge">￥</span></td>
+                                <td><span class="label label-default ">No</span></td>
+                                <td>
+                                    <button class="btn btn-danger etaf_remind_btn">
+                                        提醒
+                                    </button>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+</div>
+</div>
+
+</div>
+
+</div>
+
+<div class="col-md-3 column ">
+    <div class="etaf_pan">
+
+    </div>
+</div>
+</div>
+</div>
+</div>
+
+<!-- create activities  -->
+<div class="modal fade" id="create_modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title" id="myModalLabel">创建活动</h4>
+            </div>
+            <div class="modal-body">
+                <form class="form-horizontal" role="form">
+                    <!--活动id-->
+                    <div class="form-group">
+                        <div>
+
+                            <label for="activityID" class="col-sm-2 control-label">活动 id </label>
+
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" id="activityID" placeholder="acivity 1"
+                                       readonly>
+                            </div>
+                        </div>
+                    </div>
+                    <br/>
+                    <!--活动方案-->
+                    <div>
+                        <h4>活动项</h4>
+
+                        <div>
+                            <div class="form-group">
+
+                                <label for="act_time" class="col-md-2 control-label">活动时间</label>
+
+                                <div class="col-sm-10 input-group date form_datetime" data-link-field="act_time">
+                                    <input class="form-control" id="act_time" size="16" type="text" value="" readonly>
+                                    <span class="input-group-addon"><span
+                                            class="glyphicon glyphicon-remove"></span></span>
+                                    <span class="input-group-addon"><span class="glyphicon glyphicon-th"></span></span>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="act_address" class="col-sm-2 control-label">活动地点</label>
+
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" id="act_address">
+                                </div>
+
+                            </div>
+                            <div class="form-group">
+                                <label for="act_content" class="col-sm-2 control-label">活动内容</label>
+
+                                <div class="col-sm-10">
+                                    <textarea class="form-control" id="act_content" rows="3"></textarea>
+                                </div>
+
+                            </div>
+
+                        </div>
+                    </div>
+                    <!--参与者名单-->
+                    <div>
+                        <h4>参与者名单及邀请，利用weibo平台提供的好友选择器组件，待开发...</h4>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                <button type="button" class="btn btn-primary">Save</button>
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+<!-- /.modal -->
+<script type="text/javascript">
+    $('.form_datetime').datetimepicker({
+        // language:  'zh-CN',
+        weekStart: 1,
+        todayBtn: 1,
+        autoclose: 1,
+        todayHighlight: 1,
+        startView: 2,
+        forceParse: 0,
+        showMeridian: 1,
+        format: "yyyy-mm-dd hh:ii"
+    });
+</script>
+
+</body>
+</html>

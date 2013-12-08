@@ -1,0 +1,153 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    {% load staticfiles %}
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>intruduce</title>
+    <script type="text/javascript" src="http://lib.sinaapp.com/js/jquery/1.7.2/jquery.min.js"></script>
+    <script type="text/javascript" src="{% static 'weiAA_app/js/jquery.snow.js'%}"></script>
+    <link rel="stylesheet" type="text/css" href="{% static 'weiAA_app/css/style.css' %}" />
+    <link rel="stylesheet" type="text/css" href="{% static 'weiAA_app/css/bootstrap.css' %}" />
+    <script src="{% static '/weiAA_app/js/bootstrap.js' %}"></script>
+    <style type="text/css">
+        body{
+            background-color: #da5319;
+        }
+        #container_up{
+            margin: 0 auto;
+            padding: 0;
+           width: 700px;
+            color: #FFFFFF;
+            font: normal 80%/120% Georgia, "Times New Roman", Times, serif;
+        }
+        #container_down{
+            padding-top: 20px;
+            width: 80%;
+            margin: 20px;
+            margin-left: 40px;
+            color: #FFFFFF;
+            font: normal 80%/120% Georgia, "微软雅黑","宋体"";
+        }
+        a{
+            text-decoration: none;
+            color: #FFFFFF;
+            cursor: pointer;
+        }
+        a:hover {
+            color: #666666;
+        }
+        h1 {
+            font: normal 320%/100% Georgia, "Times New Roman", Times, serif;
+            margin: 20px 0 5px 0;
+            letter-spacing: -2px;
+        }
+        h3{
+            font: normal 250%/100% Georgia, "Times New Roman", Times, serif;
+            margin: 20px 0 5px 0;
+            letter-spacing: -2px;
+        }
+        .credits {
+            border-bottom: solid 1px #ccc;
+            padding-bottom: 5px;
+            margin: 0 0 30px 0;
+            font: 120% Garamond, Georgia, serif;
+        }
+        .credits em {
+
+            font-size: 22px;
+            color: #FFFFFF;
+        }
+        .credits a {
+            font-family: "微软雅黑";
+            color: #fafafa;
+            text-decoration: none;
+            font-size: 20px;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+        }
+        .ul1{
+            padding: 5px;;
+        }
+        .ul2{
+            display: none;
+            margin-left: 20px;
+            font-family: "微软雅黑", "宋体";
+            font-size: 20px;
+            line-height:40px;
+        }
+        .ul2 li{
+            padding: 5px;
+        }
+        .ul3{
+            margin-left: 40px;;
+        }
+
+    </style>
+    <script type="text/javascript">
+        $(document).ready(function(){
+            $.fn.snow();
+
+            $('#btn1').click(function(){
+                $('#cont1').slideToggle("slow");
+            });
+            $('#btn2').click(function(){
+                $('#cont2').slideToggle("slow");
+            });
+            $('#btn3').click(function(){
+                $('#cont3').slideToggle("slow");
+            });
+            $('#btn4').click(function(){
+                $('#cont4').slideToggle("slow");
+            });
+        });
+        $()
+    </script>
+</head>
+<body>
+<div id="container_up">
+    <h1>Introduce | weiAA</h1>
+    <p class="credits"><em>by:&nbsp;&nbsp;</em> <a href="http://weibo.com/dancinglinks">林新安 & 林清祥</a>
+    <div style="float: right;"><em>contact:&nbsp;&nbsp;</em> <a href="http://weibo.com/dancinglinks">253222303@qq.com</a>
+    </div>
+    </p>
+</div>
+<div id="container_down">
+    <ul class="ul1">
+        <li>
+            <h3 id="btn1">what is weiAA ?</h3>
+            <ul class="ul2" id="cont1">
+                <li>1. weiAA是一个基于新浪微博平台的应用。.</li>
+                <li>2. 在weiAA上，你可以发起一个活动，邀请你的小伙伴们来参与这个活动。比如朋友聚餐、公司聚餐、结伴旅游、宿舍缴费、班级班费。。。这类需要AA支付的活动</li>
+                <li>3. weiAA会帮你记录经费收支细节，以及帮你做你最不想做的事：提醒你的小伙伴们--'你们的钱还没给我呐！' </li>
+           <li>4. 这只是最初的需求，weiAA还会增量形式提交一些新功能让你和你的小伙伴更方便地AA </li>
+            </ul>
+        </li>
+
+        <li>
+            <h3 id="btn2">Simple UserCase</h3>
+            <ul class ="ul2" id="cont2">
+                <li><img src =  "{% static 'weiAA_app/img/UseCase Diagram0.png'%}"></li>
+            </ul>
+        </li>
+
+        <li><h3 id="btn3">How will we develop weiAA ?</h3>
+            <ul class="ul2" id="cont3">
+                <li>1. 后台开发：{python} + {使用 基于MVC模型的 Django 框架} + {mysql 数据库}</li>
+                <li>2. 前端开发：使用bootstrap框架</li>
+                <li>3. 应用部署： 应用托管在SAE 云平台</li>
+            </ul>
+        </li>
+        <li><h3 id="btn4">Division of work</h3>
+            <ul class="ul2" id="cont4">
+                <li>1. 林新安：项目管理　＋　前端开发 +　应用部署</li>
+                <li>2. 林清祥：后台逻辑业务开发</li>
+            </ul>
+        </li>
+
+
+    </ul>
+
+</div>
+</body>
+</html>

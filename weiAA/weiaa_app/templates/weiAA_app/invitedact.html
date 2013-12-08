@@ -1,0 +1,515 @@
+<div id="act_panel_b" class="collapse">
+	<div class="page-header" style="color: #ffffff;">
+		<h2>
+			被邀请活动 <small>面板</small>
+		</h2>
+	</div>
+	<div class="tabbable" id="2tabs-565942">
+		<ul class="nav nav-tabs">
+			<li class="active"><a href="#2panel-tab1" data-toggle="tab"
+				class=""><h4>待确认活动</h4></a></li>
+			<li><a href="#2panel-tab2" data-toggle="tab"><h4>已确认活动</h4></a>
+			</li>
+			<li><a href="#2panel-tab3" data-toggle="tab"><h4>待缴费活动</h4></a>
+			</li>
+			<li><a href="#2panel-tab4" data-toggle="tab"><h4>已结束活动</h4></a>
+			</li>
+		</ul>
+		<!-- tab - content-->
+		<div class="tab-content">
+			<!-- tab1 content -->
+			<div class="tab-pane active" id="2panel-tab1">
+				<!--  <h3>未确认活动</h3> -->
+				<br />
+
+				<div class="panel-group">
+					<!--一个活动 begin-->
+					{% for m in activity_lists.unchecked_activity_list2 %}
+					{% with a=m.aid %}
+					<div class="panel panel-default">
+						<!-- 活动head -->
+						<div class="panel-heading">
+							<h4 class="panel-title">
+
+								<a href="#act_id_{{ a.aid }}" data-toggle="collapse"> <!-- href= "#act_id_x"  x为活动 ID -->
+									<span class="label label-danger">{{ a.name }}</span> <span
+									class="label label-primary">{{ a.date|date:"Y-m-d H:i:s" }}</span> <span
+									class="label label-success">创建者: {{ a.creator_id }}</span> <span
+									class="label label-info">活动状态: 未确认</span>
+								</a>
+							</h4>
+						</div>
+						<!--活动 end-->
+						<!--  活动body -->
+						<div id="act_id_{{ a.aid }}" class="panel-collapse collapse">
+							<!--id= 'act_id_x' x为活动ID -->
+							<div class="panel-body">
+								{% ifequal m.confirm_state 0 %}
+								<div class = "row">
+									<div class="col-md-6">
+										<a data-trigger="confirm"  href="confirm_join?act_id={{a.aid}}" class="btn btn-success btn-lg btn-block confirm_join_btn" id = "confirm_join_btn_{{a.aid}}">确认参加</a><!--123 为活动id -->
+									</div>
+									<div class="col-md-6">
+										<a data-trigger="confirm" href="reject_join?act_id={{a.aid}}" class="btn btn-danger btn-lg btn-block reject_join_btn" id="reject_join_btn_{{a.aid}}" >拒绝参加</a><!--123为活动id -->
+									</div>
+								</div>
+
+				
+								<br/>
+								{% endifequal %}
+								{% for plan in a.weiaaactivityplan_set.all %}
+								<div id="act_plan_id_{{ plan.apid }}">
+									<!-- id="act_plan_id_x"  x为 plan_id -->
+									<table
+										class="table table-condensed table-hover etaf_td_width_4">
+										<!-- 活动方案 -->
+										<tr>
+											<td colspan="2">方案提出者：{{ plan.creator_id }}</td>
+											<td>
+												<div id="vote_num_{{ plan.apid }}">票数：{{ plan.vote }}</divi>
+											</td>
+											<td>
+												<!--<button type="button" class="btn btn-success etaf_vote_btn" onclick="window.location.href='act_vote?act_plan_id=1'">-->
+												<!--投票--> <!--</button>-->
+												<button type="button" class="btn btn-success etaf_vote_btn"
+													id="vote_btn_{{ plan.apid }}">
+													<!--id 格式：vote_btn_planId-->
+													投票
+												</button>
+											</td>
+										</tr>
+										<tr class="active">
+											<td>开始时间</td>
+											<td>地点</td>
+											<td>内容</td>
+											<td>预计人均</td>
+										</tr>
+										
+										{% for item in plan.weiaaactivityplanitem_set.all %}
+										{% if forloop.counter|divisibleby:2 %}
+										<tr class="danger">
+											<td>{{ item.start_time|date:"Y-m-d H:i:s" }}</td>
+											<td>{{ item.place }}</td>
+											<td>{{ item.content }}</td>
+											<td>{{ item.estimate_per_cost }}</td>
+										</tr>
+										{% else %}
+										<tr class="success">
+											<td>{{ item.start_time|date:"Y-m-d H:i:s" }}</td>
+											<td>{{ item.place }}</td>
+											<td>{{ item.content }}</td>
+											<td>{{ item.estimate_per_cost }}</td>
+										</tr>
+										{% endif %}
+										{% endfor %}
+										<tr class="active">
+											<td colspan="4">
+												<div class="etaf_momey_line">
+													预计人均：{{ plan.estimate_per_cost }} 
+													<span class="badge">￥</span>
+												</div>
+											</td>
+										</tr>
+									</table>
+									<hr class="cut_line" />
+								</div>
+								{% endfor %}
+								
+								<!-- 参与者list-->
+								<div>
+									<h4>
+										<span class="label label-primary">参与者名单:</span>
+									</h4>
+									<table class="table table-condensed table-hover">
+										<tr>
+											<td colspan="2">参与者</td>
+											<td>确认参加</td>
+										</tr>
+										<!-- member begin-->
+										{% for member in a.weiaaactivitymember_set.all %}
+										<tr id="tr_member_{{ member.uid.uid }}">
+											<!--id 格式： tr_member_x x代表member的user id-->
+											<td colspan="2">
+											{{ member.uid }}
+											</td>
+											{% ifequal member.confirm_state 0 %}
+											<td><span class="label label-default">Waiting</span></td>					
+											{% endifequal %}
+											{% ifequal member.confirm_state 1 %}
+											<td><span class="label label-success">Yes</span></td>
+											{% endifequal %}
+											{% ifequal member.confirm_state 2 %}
+											<td><span class="label label-default">No</span></td>
+											{% endifequal %}
+										</tr>
+										{% endfor %}
+										<!-- member end-->
+									</table>
+									</ul>
+								</div>
+								<div>
+									<a data-trigger="confirm" href="create_act_plan?act_id={{a.aid}}"
+										class="btn btn-primary btn-lg btn-block">添加新方案</a>
+								</div>
+							</div>
+						</div>
+					</div>
+					{% endwith %}
+					{% empty %}
+					<h3>暂无未确认活动</h3>
+					{% endfor %}
+					<!--一个活动 end-->
+				</div>
+			</div>
+			<!-- tab2 content -->
+			<div class="tab-pane" id="2panel-tab2">
+				<!--  <h3>已确认活动</h3> -->
+				<br />
+
+				<div class="panel-group">
+					<!-- 活动 begin-->
+					{% for m in activity_lists.checked_activity_list2 %}
+					{% with a=m.aid %}
+					<div class="panel panel-default">
+						<div class="panel-heading">
+							<h4 class="panel-title">
+								<a href="#act_id_{{ a.aid }}" data-toggle="collapse"> <span
+									class="label label-danger">{{ a.name }}</span> <span
+									class="label label-primary">{{ a.date|date:"Y-m-d H:i:s" }}</span> <span
+									class="label label-success">创建者: {{ a.creator_id }}</span> <span
+									class="label label-info">活动状态: 已确认</span>
+								</a>
+							</h4>
+						</div>
+						<!--  活动body -->
+						<div id="act_id_{{ a.aid }}" class="panel-collapse collapse">
+							<div class="panel-body">
+								{% for plan in a.weiaaactivityplan_set.all %}
+								{% if plan.is_selected %}
+								<table class="table table-condensed table-hover etaf_td_width_4">
+									<!-- 活动方案 begin-->
+									
+									<tr>
+										<td colspan="2">方案提出者：{{plan.creator_id}}</td>
+										<td>票数：{{plan.vote}}</td>
+										<td></td>
+									</tr>
+									<tr class="active">
+										<td>开始时间</td>
+										<td>地点</td>
+										<td>内容</td>
+										<td>预计人均</td>
+									</tr>
+									<!--活动方案条目 begin -->
+									{% for item in plan.weiaaactivityplanitem_set.all %}
+										{% if forloop.counter|divisibleby:2 %}
+										<tr class="danger">
+											<td>{{ item.start_time|date:"Y-m-d H:i:s" }}</td>
+											<td>{{ item.place }}</td>
+											<td>{{ item.content }}</td>
+											<td>{{ item.estimate_per_cost }}</td>
+										</tr>
+										{% else %}
+										<tr class="success">
+											<td>{{ item.start_time|date:"Y-m-d H:i:s" }}</td>
+											<td>{{ item.place }}</td>
+											<td>{{ item.content }}</td>
+											<td>{{ item.estimate_per_cost }}</td>
+										</tr>
+										{% endif %}
+										{% endfor %}
+									<!--活动方案条目 end -->
+									<tr class="active">
+
+										<td colspan="4">
+											<div class="etaf_money_line">预计人均：
+											{{ plan.estimate_per_cost }}
+											<span class="badge">￥</span>
+											</div>
+										</td>
+									</tr>
+									
+									<!-- 活动方案 end-->
+								</table>
+								<hr class="cut_line" />
+								{% endif %}
+								{% endfor %}
+								<!-- 参与者list-->
+								<div>
+									<h4>
+										<span class="label label-primary">参与者名单:</span>
+									</h4>
+									<table class="table table-condensed table-hover">
+										<tr>
+											<td colspan="4">参与者</td>
+										</tr>
+										{% for member in a.weiaaactivitymember_set.all %}
+										{% ifequal member.confirm_state 1 %}
+										<tr>
+											<td colspan="4">{{member.uid}}</td>
+
+										</tr>
+										{% endifequal %}
+										{% endfor %}
+									</table>
+									</ul>
+								</div>
+							</div>
+						</div>
+					</div>
+					{% endwith %}
+					{% empty %}
+					<h3>暂无已确认活动</h3>
+					{% endfor %}
+					<!-- 活动 end-->
+				</div>
+			</div>
+			<!-- tab3 content -->
+			<div class="tab-pane" id="2panel-tab3">
+				<!--<h3>待缴费活动</h3>-->
+				<br />
+
+				<div class="panel-group">
+					<!-- 活动 begin-->
+					{% for m in activity_lists.feeing_activity_list2 %}
+					{% with a=m.aid %}
+					<div class="panel panel-default">
+						<div class="panel-heading">
+							<h4 class="panel-title">
+								<a href="#act_id_{{ a.aid }}" data-toggle="collapse"> <span
+									class="label label-danger">{{ a.name }}</span> <span
+									class="label label-primary">{{ a.date|date:"Y-m-d H:i:s" }}</span> <span
+									class="label label-success">创建者: {{ a.creator_id }}</span> <span
+									class="label label-info">活动状态: 收费中</span>
+								</a>
+							</h4>
+						</div>
+						<!--  活动body -->
+						<div id="act_id_{{ a.aid }}" class="panel-collapse collapse">
+							<div class="panel-body">
+								{% for plan in a.weiaaactivityplan_set.all %}
+								{% if plan.is_selected %}
+								<table class="table table-condensed table-hover etaf_td_width_4">
+									<!-- 活动方案 begin-->									
+									<tr>
+										<td colspan="2">方案提出者：{{plan.creator_id}}</td>
+										<td>票数：{{plan.vote}}</td>
+										<td></td>
+									</tr>
+									<tr class="active">
+										<td>开始时间</td>
+										<td>地点</td>
+										<td>内容</td>
+										<td></td>
+									</tr>
+									<!--活动方案条目 begin -->
+									{% for item in plan.weiaaactivityplanitem_set.all %}
+										{% if forloop.counter|divisibleby:2 %}
+										<tr class="danger">
+											<td>{{ item.start_time|date:"Y-m-d H:i:s" }}</td>
+											<td>{{ item.place }}</td>
+											<td>{{ item.content }}</td>
+											<td>{{ item.estimate_per_cost }}</td>
+										</tr>
+										{% else %}
+										<tr class="success">
+											<td>{{ item.start_time|date:"Y-m-d H:i:s" }}</td>
+											<td>{{ item.place }}</td>
+											<td>{{ item.content }}</td>
+											<td></td>
+										</tr>
+										{% endif %}
+										{% endfor %}
+									<!--活动方案条目 end -->
+									<tr class="active">
+
+										<td colspan="4">
+											<div class="etaf_money_line">实际总消费：
+											{{plan.real_cost}}
+											<span class="badge">￥</span>
+											</div>
+										</td>
+									</tr>									
+									<!-- 活动方案 end-->
+								</table>
+								<hr class="cut_line" />
+								{% endif %}
+								{% endfor %}
+								<!-- 参与者list-->
+								<div>
+									<h4>
+										<span class="label label-primary">参与者名单:</span>
+									</h4>
+									<table class="table table-condensed table-hover">
+										<tr>
+											<td>参与者</td>
+											<td>应缴金额</td>
+											<td>是否缴费</td>
+											<td></td>
+										</tr>
+										<!-- member begin-->
+										{% for member in a.weiaaactivitymember_set.all %}
+										{% ifequal member.confirm_state 1 %}
+										<tr id="tr_member_{{ member.uid.uid }}">
+											<!--id 格式： tr_member_x x代表member的user id-->
+											<td>{{ member.uid }}</td>
+											{% ifequal member.uid.uid current_user.uid %}
+											{% if member.is_paid %}
+											<td>{{ member.real_per_cost }}<span class="badge">￥</span></td>
+											<td><span class="label label-success">Yes</span></td>
+											<td>
+												<a href="pay" class="btn btn-danger etaf_remind_btn pay_btn" id = "pay_{{member.uid.uid}}" disabled>
+													缴费</a>
+											</td>
+											{% else %}
+											<td>{{ member.real_per_cost }}<span class="badge">￥</span></td>
+											<td><span class="label label-default">No</span></td>
+											<td>
+												<a href="pay?member_id={{member.uid.uid}}&act_id={{member.aid.aid}}" class="btn btn-danger etaf_remind_btn pay_btn" id = "pay_{{member.uid.uid}}" >
+													缴费</a>
+											</td>
+											{% endif %}
+											{% else %}
+											{% if member.is_paid %}
+											<td>{{ member.real_per_cost }}<span class="badge">￥</span></td>
+											<td><span class="label label-success">Yes</span></td>
+											<td>
+												<a href="pay" class="btn btn-danger etaf_remind_btn pay_btn" id = "pay_{{member.uid.uid}}" disabled>
+													缴费</a>
+											</td>
+											{% else %}
+											<td>{{ member.real_per_cost }}<span class="badge">￥</span></td>
+											<td><span class="label label-default">No</span></td>
+											<td>
+												<a href="pay" class="btn btn-danger etaf_remind_btn pay_btn" id = "pay_{{member.uid.uid}}" disabled>
+													缴费</a>
+											</td>
+											{% endif %}
+											{% endifequal %}
+										</tr>
+										{% endifequal %}
+										{% endfor %}
+										<!-- member end-->
+									</table>
+								</div>
+							</div>
+						</div>
+					</div>
+					{% endwith %}
+					{% empty %}
+					<h3>暂无待缴费活动</h3>
+					{% endfor %}
+					<!-- 活动 end-->
+				</div>
+			</div>
+			<!-- tab4 content -->
+			<div class="tab-pane" id="2panel-tab4">
+				<!--<h3>已结束活动</h3>-->
+				<br />
+
+				<div class="panel-group">
+					<!-- 活动 begin-->
+					{% for m in activity_lists.finished_activity_list2 %}
+					{% with a=m.aid %}
+					<div class="panel panel-default">
+						<div class="panel-heading">
+							<h4 class="panel-title">
+								<a href="#act_id_{{ a.aid }}" data-toggle="collapse"> <span
+									class="label label-danger">{{ a.name }}</span> <span
+									class="label label-primary">{{ a.date|date:"Y-m-d H:i:s" }}</span> <span
+									class="label label-success">创建者: {{ a.creator_id }}</span> <span
+									class="label label-info">活动状态: 已结束</span>
+								</a>
+							</h4>
+						</div>
+						<!--  活动body -->
+						<div id="act_id_{{ a.aid }}" class="panel-collapse collapse">
+							<div class="panel-body">
+								<!-- 活动方案 begin-->
+								{% for plan in a.weiaaactivityplan_set.all %}
+								{% if plan.is_selected %}
+								<table class="table table-condensed table-hover etaf_td_width_4">
+									<tr>
+										<td colspan="2">方案提出者：{{plan.creator_id}}</td>
+										<td>票数：{{plan.vote}}</td>
+										<td></td>
+									</tr>
+									<tr class="active">
+										<td>开始时间</td>
+										<td>地点</td>
+										<td>内容</td>
+										<td></td>
+									</tr>
+									<!--活动方案条目 begin -->
+									{% for item in plan.weiaaactivityplanitem_set.all %}
+										{% if forloop.counter|divisibleby:2 %}
+										<tr class="danger">
+											<td>{{ item.start_time|date:"Y-m-d H:i:s" }}</td>
+											<td>{{ item.place }}</td>
+											<td>{{ item.content }}</td>
+											<td></td>
+										</tr>
+										{% else %}
+										<tr class="success">
+											<td>{{ item.start_time|date:"Y-m-d H:i:s" }}</td>
+											<td>{{ item.place }}</td>
+											<td>{{ item.content }}</td>
+											<td></td>
+										</tr>
+										{% endif %}
+										{% endfor %}
+									<!--活动方案条目 end -->
+									<tr class="active">
+
+										<td colspan="4">
+											<div class="etaf_money_line">
+											实际总消费：{{plan.real_cost}}
+											<span class="badge">￥</span>
+											</div>
+										</td>
+									</tr>
+								</table>
+								<hr class="cut_line" />
+								{% endif %}
+								{% endfor %}
+								<!-- 活动方案 end-->
+								
+								<!-- 参与者list-->
+								<div>
+									<h4>
+										<span class="label label-primary">参与者名单:</span>
+									</h4>
+									<table class="table table-condensed table-hover">
+										<tr>
+											<td>参与者</td>
+											<td>已缴金额</td>
+										</tr>
+										<!-- member begin-->
+										{% for member in a.weiaaactivitymember_set.all %}
+										{% ifequal member.confirm_state 1 %}
+										<tr id="tr_member_{{ member.uid.uid }}">
+											<!--id 格式： tr_member_x x代表member的user id-->
+											<td>{{ member.uid }}</td>
+											<td>{{ member.real_per_cost }}<span class="badge">￥</span></td>
+											
+										</tr>
+										{% endifequal %}
+										{% endfor %}
+										<!-- member end-->
+									</table>
+								</div>
+							</div>
+						</div>
+					</div>
+					{% endwith %}
+					{% empty %}
+					<h3>暂无已结束活动</h3>
+					{% endfor %}
+					<!-- 活动 end-->
+				</div>
+
+			</div>
+
+		</div>
+	</div>
+</div>

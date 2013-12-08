@@ -1,0 +1,99 @@
+{% extends "base.html" %}
+{% load static %}
+{% block etaf_body %}
+<script type="text/javascript">
+    $(document).ready(function(){
+//        alert("fdsa");
+        $('#create_modal').modal('toggle');
+        $(function () { $("input,select,textarea").not("[type=submit]").jqBootstrapValidation(); } );
+    });
+    function selected_member(data){
+        var members = "";
+        member_table = $('#member_list');
+        member_table.empty();
+        for(var i=0;i<data.length;++i)
+        {
+            member_table.append(
+                    "<tr><td><input  type='text' class='form-control' name='member_"+(i+1)+"' value="+data[i].screen_name+"></td></tr>"
+            )
+            members+=(i+1)+"th member is "+data[i].screen_name+"\n";
+        }
+
+       // alert(members);
+
+    }
+    WB2.anyWhere(function(W){
+        W.widget.selector({
+            id : "select_member_btn",
+            title: "请选择活动参与者",
+            callback: selected_member
+        });
+    });
+
+</script>
+
+<!-- create activities  -->
+<div class="modal fade" id="create_modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <!--<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>-->
+                <h4 class="modal-title" id="myModalLabel">创建活动</h4>
+            </div>
+            <div class="modal-body">
+                <form class="form-horizontal" role="form" action="create_act_form" method="post">
+                    {% csrf_token %}
+
+                    <div class="form-group">
+                        <div>
+
+                            <label for="activityID" class="col-sm-2 control-label">创建者 </label>
+
+                            <div class="col-sm-4">
+                                <input type="text" class="form-control" id="activityID" value="{{screen_name}}"
+                                       readonly>
+                            </div>
+							<label for="activityTime" class="col-sm-2 control-label">创建时间 </label>
+
+                            <div class="col-sm-4">
+                                <input type="text" class="form-control" id="activityTime" name="create_time" value="{{create_time}}"
+								
+                                       readonly>
+                            </div>
+                        </div>
+                    </div>
+                    <br/>
+                    {% include 'weiAA_app/create_act_plan_base.html'%}
+
+                    <!--参与者名单-->
+                    <br>
+                    <br>
+                    <div>
+                        <button id="select_member_btn" class="btn btn-primary btn-block" type="button">选择参与者</button>
+                        <br/>
+                        <h4><span class="label label-primary">参与者名单:</span></h4>
+                        <table class="table table-condensed table-hover" id="member_list">
+                            <tr>
+                                <td>
+                                    <input  type="text" class="form-control" required="">
+                                </td>
+                            </tr>
+                        </table>
+
+                    </div>
+
+                    <div class="modal-footer">
+                        <a type="button" class="btn btn-default"  href="/">Cancel</a>
+                        <button type="submit" class="btn btn-primary">Save</button>
+                    </div>
+                </form>
+            </div>
+
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+<!-- /.modal -->
+{% endblock %}
+

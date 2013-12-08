@@ -1,0 +1,64 @@
+.etaf_list_pad_top3{
+    padding-top: 5%;
+}
+
+ .etaf_td_width_4 td{
+    width: 25%;
+}
+ .etaf_pan_foot1{
+     display: block;
+     height: 120px;
+ }
+.etaf_pan_foot2{
+    display: block;
+    height: 450px;
+}
+ .etaf_pan_foot3{
+     display: block;
+     height: 600px;
+ }
+.etaf_momey_line{
+    margin-top: 10px;
+    float: right;
+}
+.cut_line{
+
+    clear: both;
+    position: relative;
+    height: 10px;
+    border: none;
+    border-top: 2px dashed #00b3ee;
+
+}
+.etaf_vote_btn,
+.etaf_remind_btn{
+    float: right;
+}
+.etaf_profile {
+    margin-top: 10px;
+
+}
+
+.etaf_remind_text {
+    width: 80%;
+    color: #00b3ee;
+}
+
+a.etaf_list-group-item:hover,
+a.etaf_list-group-item:focus {
+    background-color: #428bca;
+    border-color: #428bca;
+}
+
+#btn_level1 {
+    padding-top: 5%;
+    padding-right: 20%;
+}
+
+.etaf_act_list,
+.etaf_act_list a {
+
+}
+.panel-heading a{
+    text-decoration: none;
+}

@@ -1,0 +1,32 @@
+from django.conf.urls import patterns, url
+from weiaa_app import views
+from weiaa_app import ajax
+urlpatterns = patterns('',
+	url(r'^$', views.index, name='index'),
+	url(r'^test$',views.test,name = 'test'),
+	url(r'^introduce$',views.introduce,name='introduce'),
+	url(r'^get_access_token$',views.get_access_token,),
+	url(r'^login$',views.weiboLogin,name="login"),
+	url(r'^callback$',views.callback,name = 'callback'),
+	url(r'^create_act$',views.create_act,name='create_act'),
+	url(r'^create_act_form$',views.create_act_form,name='create_act_form'),
+	url(r'^create_act_plan$',views.create_act_plan,name='create_act_plan'),
+	url(r'^create_act_plan_form$',views.create_act_plan_form,name='create_act_plan_form'),
+	url(r'^confirm_act$',views.confirm_act,name='confirm_act'),
+	url(r'^confirm_join$',views.confirm_join,name='confirm_join'),
+	url(r'^reject_join$',views.reject_join,name='reject_join'),
+
+	# url(r'^act_vote$',views.act_vote,name='act_vote'),
+	url(r'^ajax_test$',ajax.test),
+	url(r'^ajax_vote$',ajax.vote),
+	url(r'^ajax_remind_join$',ajax.remind_join),
+	url(r'^ajax_remind_fee$',ajax.remind_fee),
+	url(r'^ajax_remove_member$',ajax.remove_member),
+	url(r'^logout$',views.logout),
+	url(r'^contact_us$',views.contact_us),
+	url(r'^charge$',views.charge),
+	url(r'^charge_form$',views.charge_form),
+	url(r'^pay$',views.pay,name='pay'),
+	url(r'^finish_act$',views.finish_act,name='finish_act'),
+	url(r'^ajax_confirm_fee$',ajax.confirm_fee,),
+)	

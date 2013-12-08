@@ -1,0 +1,120 @@
+<!--活动方案组-->
+<div id="act_plan_items">
+    <!--活动方案-->
+    <div id="act_plan_item_1">
+        <div class="plan_item_head">
+            <h4><span class="label label-primary">活动项 1</span>
+                <a class="remove_plan_item_btn btn btn-danger"
+                   href="javascript:remove_plan_item('act_plan_item_1');">删除活动项</a></h4>
+        </div>
+        <div class="plan_item_body">
+            <div class="form-group control-group">
+                <label for="act_time_1" class="col-md-2 control-label">活动时间</label>
+
+                <div class="col-sm-10 input-group date form_datetime controls" data-link-field="act_time">
+                    <input class="form-control" id="act_time_1" size="16" type="text" name="item_time_1" required
+                            >
+                                    <span class="input-group-addon"><span
+                                            class="glyphicon glyphicon-remove"></span></span>
+                                        <span class="input-group-addon"><span
+                                                class="glyphicon glyphicon-th"></span></span>
+
+                    <p class="help-block"></p>
+
+                </div>
+            </div>
+            <div class="form-group control-group">
+                <label for="act_address_1" class="col-sm-2 control-label">活动地点</label>
+
+                <div class="col-sm-10 controls">
+                    <input required type="text" class="form-control" id="act_address_1" name="item_address_1">
+
+                    <p class="help-block"></p>
+                </div>
+            </div>
+            <div class="form-group control-group">
+                <label for="act_content_1" class="col-sm-2 control-label">活动内容</label>
+
+                <div class="col-sm-10 controls">
+                    <textarea required class="form-control" id="act_content_1" rows="2"
+                              name="item_content_1"></textarea>
+
+                    <p class="help-block"></p>
+                </div>
+            </div>
+            <div class="form-group control-group">
+                <label for="estimate_per_cost_1" class="col-sm-2 control-label">预计人均</label>
+
+                <div class="col-sm-10 input-group controls">
+                    <input type="number" class="form-control" id="estimate_per_cost_1" name="item_estimate_per_cost_1"
+                           required="">
+                    <span class="input-group-addon">￥</span>
+
+                    <p class="help-block"></p>
+                </div>
+            </div>
+        </div>
+        <hr class="cut_line"/>
+    </div>
+</div>
+<div><a class="remove_plan_item_btn btn btn-info btn-block"
+        href="javascript:add_plan_item('act_plan_item_1');"> + 添加活动项</a>
+    <!--<button id="add_plan_item" class="btn btn-info btn-block"  >添加活动项</button>-->
+
+</div>
+<script type="text/javascript">
+
+    plan_item_id = 1;
+
+    function remove_plan_item(item_id) {
+        var f = confirm("确定删除该活动项？");
+        item_id = "#" + item_id;
+
+        if (f) {
+            $(item_id).empty();
+        }
+    }
+
+
+    function add_plan_item() {
+
+        plan_item_id = plan_item_id + 1;
+        var plan_div = "<div id=\"act_plan_item_" + plan_item_id + "\"><div class=\"plan_item_head\"><h4><span class=\"label label-primary\">活动项 " + plan_item_id + "</span>" +
+                "<a class=\"remove_plan_item_btn btn btn-danger\" href=\"javascript:remove_plan_item(\'act_plan_item_" + plan_item_id + "\');\" >删除活动项</a></h4></div>" +
+                "<div class=\"plan_item_body\"><div class=\"form-group control-group\"><label for=\"act_time_" + plan_item_id + "\" class=\"col-md-2 control-label\">活动时间</label><div class=\"col-sm-10 input-group date form_datetime controls \" data-link-field=\"act_time\">" +
+                "<input class=\"form-control\" size=\"16\" type=\"text\" id=\"act_time_" + plan_item_id + "\" name=\"item_time_" + plan_item_id + "\" required>" +
+                "<span class=\"input-group-addon\"><span class=\"glyphicon glyphicon-remove\"></span></span> <span class=\"input-group-addon\"><span class=\"glyphicon glyphicon-th\"></span></span><p class=\"help-block\"></p></div></div>" +
+                "<div class=\"form-group control-group\"> <label for=\"act_address_" + plan_item_id + "\" class=\"col-sm-2 control-label\">活动地点</label> <div class=\"col-sm-10 controls \">" +
+                "<input type=\"text\" required class=\"form-control\"  id = \"act_address_" + plan_item_id + " \" name=\"item_address_" + plan_item_id + "\" ></div> </div>" +
+                " <div class=\"form-group control-group\"> <label for=\"act_content_" + plan_item_id + "\" class=\"col-sm-2 control-label\">活动内容</label> <div class=\"col-sm-10 controls \">" +
+                "<textarea class=\"form-control\" required rows=\"2\" id=\"act_content_" + plan_item_id + "\" name=\"item_content_" + plan_item_id + "\"></textarea><p class=\"help-block\"></p></div> </div>" +
+                "<div class=\"form-group control-group\"> <label for=\"estimate_per_cost_" + plan_item_id + "\" class=\"col-sm-2 control-label\">预计人均</label> <div class=\"col-sm-10 input-group controls\">" +
+                " <input required type=\"number\" class=\"form-control\"id=\"item_estimate_per_cost_" + plan_item_id + "\" name=\"item_estimate_per_cost_" + plan_item_id + "\"> <span class=\"input-group-addon\">￥</span></div> </div> </div> <hr class=\"cut_line\"/></div> "
+        $('#act_plan_items').append(plan_div);
+        $('.form_datetime').datetimepicker({
+            // language:  'zh-CN',
+            weekStart: 1,
+            todayBtn: 1,
+            autoclose: 1,
+            todayHighlight: 1,
+            startView: 2,
+            forceParse: 0,
+            showMeridian: 1,
+            format: "yyyy-mm-dd hh:ii"
+        });
+    }
+
+    $('.form_datetime').datetimepicker({
+        // language:  'zh-CN',
+        weekStart: 1,
+        todayBtn: 1,
+        autoclose: 1,
+        todayHighlight: 1,
+        startView: 2,
+        forceParse: 0,
+        showMeridian: 1,
+        format: "yyyy-mm-dd hh:ii"
+    });
+
+    $(function () { $("input,select,textarea").not("[type=submit]").jqBootstrapValidation(); } );
+</script>
